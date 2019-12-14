@@ -1,0 +1,111 @@
+#include <windows.h>
+#include <iostream> 
+#include <alerror/alerror.h>
+#include <alcommon/alproxy.h>
+#include <alcommon/albroker.h>
+#include <alproxies/almotionproxy.h>
+#include <alproxies/alrobotpostureproxy.h>
+#include <math.h>
+#include <string>
+#include <vector>
+#include <deque>
+
+using namespace std;
+
+int main(int argc, char *argv[])
+{
+
+	const string brokername="mybroker";
+	boost::shared_ptr<AL::ALBroker> broker; 
+	const AL::ALValue jointName = " Body";
+	try{
+		broker=AL::ALBroker::createBroker(brokername, "0.0.0.0", 54000, argv[1],9559);			
+	}catch (const AL::ALError& e){
+		cerr<<"catch exception"<<e.what()<<endl;
+	}
+
+	AL::ALMotionProxy motionProxy;
+	AL::ALRobotPostureProxy robotProxy;
+
+	const AL::ALValue RArmNames=AL::ALValue::array("RShoulderPitch","RShoulderRoll","RElbowYaw","RElbowRoll","RWristYaw");
+	//1
+	AL::ALValue RArmAngleLists;
+	RArmAngleLists.arraySetSize(5);
+	RArmAngleLists[0]=AL::ALValue::array(1.5864,1.5839,1.581,1.5774,1.5724,1.5647,1.5519,1.5284,1.4825,1.3897);
+	RArmAngleLists[1]=AL::ALValue::array(-0.11755,-0.12384,-0.13014,-0.13644,-0.14273,-0.14903,-0.15532,-0.16152,-0.16611,-0.15837);
+	RArmAngleLists[2]=AL::ALValue::array(1.0834,1.1206,1.1615,1.2141,1.3062,1.5046,1.8078,1.9977,2.0432,2.0361);
+	RArmAngleLists[3]=AL::ALValue::array(0.39887,0.40088,0.39014,0.36772,0.33715,0.30495,0.27832,0.2598,0.24687,0.23657);
+	RArmAngleLists[4]=AL::ALValue::array(0,0,0,0,0,0,0,0,0,0);
+
+	AL::ALValue TimeLists;
+	TimeLists.arraySetSize(5);
+	TimeLists[0]=AL::ALValue::array(0.15,0.30,0.45,0.60,0.75,0.90,1.05,1.20,1.35,1.50);
+	TimeLists[1]=AL::ALValue::array(0.15,0.30,0.45,0.60,0.75,0.90,1.05,1.20,1.35,1.50);
+	TimeLists[2]=AL::ALValue::array(0.15,0.30,0.45,0.60,0.75,0.90,1.05,1.20,1.35,1.50);
+	TimeLists[3]=AL::ALValue::array(0.15,0.30,0.45,0.60,0.75,0.90,1.05,1.20,1.35,1.50);
+	TimeLists[4]=AL::ALValue::array(0.15,0.30,0.45,0.60,0.75,0.90,1.05,1.20,1.35,1.50);
+
+
+	motionProxy.angleInterpolation(RArmNames, RArmAngleLists, TimeLists, true);
+
+	//2
+	RArmAngleLists[0]=AL::ALValue::array(1.218,1.094,0.65217,-0.10223,-0.62491,-0.78051,-0.88034,-0.9344,-0.96969,-0.99846);
+	RArmAngleLists[1]=AL::ALValue::array(-0.15875,-0.33675,-0.61979,-0.9108,-1.2154,-1.4018,-1.2919,-1.1592,-1.0351,-0.90715);
+	RArmAngleLists[2]=AL::ALValue::array(2.0035,1.9306,1.7835,1.6554,1.4368,0.7811,0.33301,0.20532,0.14503,0.10079);
+	RArmAngleLists[3]=AL::ALValue::array(0.22844,0.22569,0.23412,0.25497,0.28122,0.30619,0.32791,0.34654,0.36195,0.37373);
+	RArmAngleLists[4]=AL::ALValue::array(0,0,0,0,0,0,0,0,0,0);
+
+	TimeLists[0]=AL::ALValue::array(0.15,0.30,0.45,0.60,0.75,0.90,1.05,1.20,1.35,1.50);
+	TimeLists[1]=AL::ALValue::array(0.15,0.30,0.45,0.60,0.75,0.90,1.05,1.20,1.35,1.50);
+	TimeLists[2]=AL::ALValue::array(0.15,0.30,0.45,0.60,0.75,0.90,1.05,1.20,1.35,1.50);
+	TimeLists[3]=AL::ALValue::array(0.15,0.30,0.45,0.60,0.75,0.90,1.05,1.20,1.35,1.50);
+	TimeLists[4]=AL::ALValue::array(0.15,0.30,0.45,0.60,0.75,0.90,1.05,1.20,1.35,1.50);
+
+	motionProxy.angleInterpolation(RArmNames, RArmAngleLists, TimeLists, true);
+
+	//3
+	RArmAngleLists[0]=AL::ALValue::array(-1.0251,-1.0511,-1.0769,-1.1027,-1.1283,-1.1536,-1.1782,-1.2011,-1.2207,-1.2348);
+	RArmAngleLists[1]=AL::ALValue::array(-0.78976,-0.73843,-0.73651,-0.73457,-0.72737,-0.7113,-0.67181,-0.60581,-0.53804,-0.49);
+	RArmAngleLists[2]=AL::ALValue::array(0.060303,0.020455,-0.019593,-0.0604,-0.10278,-0.14779,-0.19597,-0.24515,-0.2879,-0.31329);
+	RArmAngleLists[3]=AL::ALValue::array(0.38529,0.41602,0.49697,0.62166,0.75639,0.88701,1.0143,1.1427,1.2764,1.4077);
+	RArmAngleLists[4]=AL::ALValue::array(0,0,0,0,0,0,0,0,0,0);
+
+	TimeLists[0]=AL::ALValue::array(0.15,0.30,0.45,0.60,0.75,0.90,1.05,1.20,1.35,1.50);
+	TimeLists[1]=AL::ALValue::array(0.15,0.30,0.45,0.60,0.75,0.90,1.05,1.20,1.35,1.50);
+	TimeLists[2]=AL::ALValue::array(0.15,0.30,0.45,0.60,0.75,0.90,1.05,1.20,1.35,1.50);
+	TimeLists[3]=AL::ALValue::array(0.15,0.30,0.45,0.60,0.75,0.90,1.05,1.20,1.35,1.50);
+	TimeLists[4]=AL::ALValue::array(0.15,0.30,0.45,0.60,0.75,0.90,1.05,1.20,1.35,1.50);
+
+	motionProxy.angleInterpolation(RArmNames, RArmAngleLists, TimeLists, true);
+
+	//4
+	RArmAngleLists[0]=AL::ALValue::array(-1.2417,-1.2423,-1.2397,-1.2374,-1.2374,-1.2402,-1.2452,-1.2518,-1.2596,-1.2682);
+	RArmAngleLists[1]=AL::ALValue::array(-0.48523,-0.546,-0.62786,-0.68247,-0.71755,-0.74562,-0.76813,-0.79327,-0.88347,-1.0272);
+	RArmAngleLists[2]=AL::ALValue::array(-0.31591,-0.30304,-0.29143,-0.2994,-0.33615,-0.38282,-0.37852,-0.247,0.052216,0.50844);
+	RArmAngleLists[3]=AL::ALValue::array(1.4745,1.3854,1.1919,0.99336,0.81153,0.63828,0.46555,0.29356,0.14892,0.086526);
+	RArmAngleLists[4]=AL::ALValue::array(0,0,0,0,0,0,0,0,0,0);
+
+	TimeLists[0]=AL::ALValue::array(0.15,0.30,0.45,0.60,0.75,0.90,1.05,1.20,1.35,1.50);
+	TimeLists[1]=AL::ALValue::array(0.15,0.30,0.45,0.60,0.75,0.90,1.05,1.20,1.35,1.50);
+	TimeLists[2]=AL::ALValue::array(0.15,0.30,0.45,0.60,0.75,0.90,1.05,1.20,1.35,1.50);
+	TimeLists[3]=AL::ALValue::array(0.15,0.30,0.45,0.60,0.75,0.90,1.05,1.20,1.35,1.50);
+	TimeLists[4]=AL::ALValue::array(0.15,0.30,0.45,0.60,0.75,0.90,1.05,1.20,1.35,1.50);
+
+	motionProxy.angleInterpolation(RArmNames, RArmAngleLists, TimeLists, true);
+
+	//5
+	RArmAngleLists[0]=AL::ALValue::array(-1.2772,-1.2864,-1.2929,-1.1875,0.23583,1.0021,1.3401,1.4898,1.5476,1.5639);
+	RArmAngleLists[1]=AL::ALValue::array(-1.1822,-1.3496,-1.432,-1.2564,-1.0311,-0.8214,-0.615,-0.4089,-0.20282,0.0032643);
+	RArmAngleLists[2]=AL::ALValue::array(1.0556,1.5573,1.8808,2.0162,2.0398,2.0176,1.9815,1.9424,1.9032,1.8644);
+	RArmAngleLists[3]=AL::ALValue::array(0.099892,0.12761,0.14692,0.16006,0.17075,0.18069,0.19042,0.20011,0.20979,0.21947);
+	RArmAngleLists[4]=AL::ALValue::array(-1.08,-1.16,-1.32,-1.48,-1.64,-1.64,-1.64,-1.64,-1.64,-0.94);
+
+	TimeLists[0]=AL::ALValue::array(0.15,0.30,0.45,0.60,0.75,0.90,1.05,1.20,1.35,1.50);
+	TimeLists[1]=AL::ALValue::array(0.15,0.30,0.45,0.60,0.75,0.90,1.05,1.20,1.35,1.50);
+	TimeLists[2]=AL::ALValue::array(0.15,0.30,0.45,0.60,0.75,0.90,1.05,1.20,1.35,1.50);
+	TimeLists[3]=AL::ALValue::array(0.15,0.30,0.45,0.60,0.75,0.90,1.05,1.20,1.35,1.50);
+	TimeLists[4]=AL::ALValue::array(0.15,0.30,0.45,0.60,0.75,0.90,1.05,1.20,1.35,1.50);
+
+	motionProxy.angleInterpolation(RArmNames, RArmAngleLists, TimeLists, true);
+
+}
