@@ -3,7 +3,7 @@ This is the code implementation of the paper: [Real-Time Whole-Body Imitation by
  
 
 ![image](https://github.com/chrisyrniu/whole_body_imitation_and_lfd/blob/master/imitation.png)
-<div align=center><img width="150" height="150" src="https://github.com/chrisyrniu/whole_body_imitation_and_lfd/blob/master/imitation.png"/></div>
+<div align=center><img src="https://github.com/chrisyrniu/whole_body_imitation_and_lfd/blob/master/imitation.png"/></div>
  
 ## Implementation
 Please contact yaruniu@gatech.edu for more information.
